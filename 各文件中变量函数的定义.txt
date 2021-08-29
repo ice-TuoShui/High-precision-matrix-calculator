@@ -1,0 +1,113 @@
+
+main.c
+void change();
+
+file.c
+FILE *rp;
+FILE *wp;
+int reader=0;//0 用户直接写入,1 读取文件
+int writer=0;//0 输出屏幕,1 写入文件
+char gc();
+
+
+
+realnumber.c
+int Acc = 10;//精度
+int fr = 0;      //是否保留因数
+int Acc_f = 0;   //是否依据精度输出
+int pattern = 0; // 性能模式 1 精确模式 0
+typedef struct real_number
+{
+    int *n;  //数
+    int poi; //小数点位置第几位后面
+    int len; //长度
+    int sym; //正负 0正数、1正数
+} rn;
+void free_rn(rn *a);
+void freeall_rn(rn *a);
+int build_rn(rn *a, int length);
+void *as_rn(rn *a, char s[]);
+rn *int_rn(rn *a);
+int judodd_rn(rn *a);
+void rounding_rn(rn *a, int Accuar);
+void print_rn(rn *a);
+void fprint_rn(rn *a);
+void copy_rn(rn *a, rn *b);
+int judzero_rn(rn *a);
+int judzero2_rn(rn *a);
+rn *transf_int_rn(int a);
+int judint_rn(rn *a);
+int cmp_rn(rn *a, rn *b);
+void retain_rn(rn *a, int b);
+void swap_rn(rn **a, rn **b);
+rn *add_rn(rn *a, rn *b);
+rn *sub_rn(rn *a, rn *b);
+rn *mul_rn(rn *a, rn *b);
+rn *div_rn(rn *a, rn *b);
+rn *mod_rn(rn *a, rn *b);
+rn *pow_rn(rn *a, rn *b);
+rn *fac_rn(rn *a);
+rn *square_rn(rn *a, rn *b);
+
+function.c
+int maxx(int a, int b);
+int minx(int a, int b);
+
+recognize.c
+long long Max_char = 100000; //最大符号个数
+long long Max_number = 1000; //最大数字个数
+long long Max_rn = 100000;   //最长实数字符串长度
+stack **stack_n; //储存数字的栈
+char ch;
+char *stack_c;        //储存运算符的栈
+char *num_rn;         //存储合法实数字符串
+long long tail_n = 0; //当前数字个数
+long long tail_c = 0; //当前符号个数
+int f = 0;            // 0当前正在读入数字  1当前正在读入运算符
+int calculate(char a);
+int check(char a);
+int free_all();
+int manage(char a);
+int recognize_rn(rn *a);
+int recognize_mat(mat *A);
+int recognize();
+int det();
+int R();
+int equation();
+
+matrix.c
+typedef struct matrix
+{
+    int row; //行
+    int col; //列
+    rn ***m;
+} mat;
+int count; //统计行交换次数
+int build_mat(mat *A, int row, int col);
+void free_mat(mat *A);
+void freeall_mat(mat *A);
+mat *zero_mat(int row, int col);
+mat *uni_mat(int n);
+int judzero_mat(mat *A);
+void print_mat(mat *m);
+void fprint_mat(mat *m);
+void swap_mat_row(mat *A, int b, int c);
+void nm_mat_row(mat *A, int b, rn *c);
+void na_mat_row(mat *A, int b, rn *c, int d);
+void swap_mat_col(mat *A, int b, int c);
+void nm_mat_col(mat *A, int b, rn *c);
+void na_mat_col(mat *A, int b, rn *c, int d);
+void copy_mat(mat *a, mat *b);
+mat *division_mat_col(mat *A, int a, int b);
+mat *inv_mat(mat *m);
+mat *add_mat(mat *a, mat *b);
+mat *sub_mat(mat *a, mat *b);
+mat *mul_mat(mat *a, mat *b);
+mat *T_mat(mat *m);
+mat *Ladder_mat_row(mat *m);
+rn *det_mat(mat *m);
+mat *pow_mat(mat *m, rn *b);
+rn *R_mat(mat *m);
+mat *solve(mat *m);
+mat *mul_mat_rn(mat *A, rn *a);
+mat *div_mat_rn(mat *A, rn *a);
